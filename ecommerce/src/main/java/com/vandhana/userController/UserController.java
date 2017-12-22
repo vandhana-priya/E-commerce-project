@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.vandhana.dao.UserDAO;
 import com.vandhana.model.User;
 
@@ -17,9 +19,16 @@ import com.vandhana.model.User;
 public class UserController {
 	@Autowired
 	 private UserDAO userDao;
-		@RequestMapping("/login")
-	public String login(){
+		
+	@RequestMapping(value={"/login"},method={RequestMethod.GET,RequestMethod.POST})
+	public String login(Model model){
+		model.addAttribute("user",new User());
 		return "login";
+	}
+	@RequestMapping(value={"/logout"},method={RequestMethod.GET})
+	public String logout(Model model){
+		// model.addAttribute("user",new User());
+		return "logout";
 	}
 	@RequestMapping("/signup")
 	public String signin(Model model){

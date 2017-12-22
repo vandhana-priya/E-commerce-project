@@ -1,4 +1,6 @@
-
+<%@ include file="navigation.jsp" %>
+<%@page isELIgnored="false" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -10,32 +12,18 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
-<div class="jumbotron">
-   <header>
-    <img src="resources/images/watch1.jpg">
-    <h1  style=" float:middle; display:inline"  style="font-size:800%;" style="generic-family:Lucida Grande;">   VICTORIA WATCHES</h1>
-   </header>
-  </div>
 
-  <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="homepage.html">Victoria Watches</a>
-    </div>
-    <ul class="nav navbar-nav">
-      
-      <li><a href="signup">Sign Up</a></li>
-      <li><a href="login">Login</a></li>
-      
-    </ul>
-  </div>
-</nav>
 <style>
 form {
     border: 3px solid #f1f1f1;
 }
-
+body {
+    height:100%;
+   width:100%;
+    background: url(resources/images/bkgrnd.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 input[type=text], input[type=password] {
     width: 100%;
     padding: 12px 20px;
@@ -97,12 +85,12 @@ span.psw {
 </style>
 <body>
 
-<h2>Login Form</h2>
-
-<form action="/action_page.php">
+<h2 font-color="#ffffff">Login Form</h2>
+<c:set value="${pageContext.request.contextPath }" var="context"></c:set>
+<form action="${context}/login" method="post">
   
 
-  <div class="container">
+  <div  class="container">
     <label><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="uname" required>
 
@@ -113,10 +101,7 @@ span.psw {
     <input type="checkbox" checked="checked"> Remember me
   </div>
 
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
+  
 </form>
 
 </body>

@@ -1,3 +1,4 @@
+<%@ include file="navigation.jsp" %> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,30 +9,17 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+<style>
+body {
+    height:100%;
+   width:100%;
+    background: url(resources/images/bkgrnd5.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+</style>
 <body>
 
-
-  <div class="jumbotron">
-   <header>
-    <img src="resources/images/watch1.jpg">
-    <h1   style=" float:middle; display:inline"  style="font-size:800%;" style="generic-family:Lucida Grande;">   VICTORIA WATCHES</h1>
-   </header>
-  </div>
-
-  <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Victoria Watches</a>
-    </div>
-    <ul class="nav navbar-nav">
-      
-      <li><a href="signup">Sign Up</a></li>
-      <li><a href="login">Login</a></li>
-      <li><a href="productform">Product</a></li>
-      <li><a href="User">User</a></li>
-    </ul>
-  </div>
-</nav>
 <div class="container">
     
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -45,15 +33,15 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-        <img class="img-responsive" src="resources/images/watch3.jpg" width=100% alt="Chania">
+        <img class="img-responsive" src="resources/images/watchnew.jpg" width=110% alt="cannot load">
       </div>
 
       <div class="item">
-        <img class="img-responsive" src="resources/images/watch2.jpg" width=100% alt="Chania">
+        <img class="img-responsive" src="resources/images/watchnew1.jpg" width=110% alt="Cannot load">
       </div>
     
       <div class="item">
-        <img class="img-responsive" src="resources/images/watch1.jpg" width=100% alt="Chania">
+        <img class="img-responsive" src="resources/images/watchnew2.jpg" width=110% alt="Cannot load">
       </div>
     </div>
 

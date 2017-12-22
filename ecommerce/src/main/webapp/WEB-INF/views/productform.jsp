@@ -26,17 +26,22 @@ input[type=text],input[type=number], input[type=password] {
 
 <body>
 <c:set value="${pageContext.request.contextPath }" var="context"></c:set>
-<spring-form:form class="form-horizontal" action="${context}/addproduct" method="POST" modelAttribute="product">
+<spring-form:form class="form-horizontal" action="${context}/addproduct" method="POST" modelAttribute="product" enctype="multipart/form-data">
 
 
 <div class="container">
 <spring-form:label path="productName"><b>Product Name:</b></spring-form:label>
 <spring-form:input type="text"  path="productName" placeholder="Enter product name" name="productName" ></spring-form:input>
-<spring-form:errors path="productName" id="message"/><br/>
 
-<spring-form:label path="productDesc"><b>Description:</b></spring-form:label>
+<spring-form:label path="category"><b>Category:</b></spring-form:label><br/>
+<spring-form:select path="category">
+      <spring-form:option value="0" label="--Please Select"/>
+      <spring-form:options items="${categories}" itemValue="name" itemLabel="name"/>
+ </spring-form:select> <br/>
+
+  <spring-form:label path="productDesc"><b>Description:</b></spring-form:label>
 <spring-form:input type="text"  path="productDesc" placeholder="Enter productDesc" name="productDesc" ></spring-form:input>
-<spring-form:errors path="productDesc" id="message"/><br/>
+
 
 <spring-form:label path="stock"><b>Stock:</b></spring-form:label>
 <spring-form:input type="number"  path="stock" placeholder="Enter stock" name="stock" ></spring-form:input>
@@ -54,9 +59,11 @@ input[type=text],input[type=number], input[type=password] {
 </spring-form:form>
  <table class="table table-hover">
           <tr>
-         
+         <th>productId</th>
           <th>productName</th>
+          <th>file</th>
           <th>productDesc</th>
+          <th>category</th>
           <th>stock</th>
           <th>price</th>
           
@@ -65,10 +72,12 @@ input[type=text],input[type=number], input[type=password] {
           
           <c:forEach items="${products}" var="product">
           <tr>
-            
-             
+            <c:url value="/resources/images/${product.productId}.jpg" var="url" />
+             <td>${product.productId}</td>
              <td>${product.productName}</td>
+             <td><img src="${url}" value="${pageContext.request.contextPath }" width="150" align="middle" height="150" ></td>
              <td>${product.productDesc}</td>
+             <td>${product.category}</td>
              <td>${product.stock}</td>
              <td>${product.price}</td>
              
