@@ -1,5 +1,6 @@
 package com.vandhana.userController;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.vandhana.dao.UserDAO;
 import com.vandhana.model.User;
@@ -21,14 +23,26 @@ public class UserController {
 	 private UserDAO userDao;
 		
 	@RequestMapping(value={"/login"},method={RequestMethod.GET,RequestMethod.POST})
-	public String login(Model model){
+	public String login(Model model, User user){
 		model.addAttribute("user",new User());
+		
 		return "login";
 	}
 	@RequestMapping(value={"/logout"},method={RequestMethod.GET})
 	public String logout(Model model){
 		// model.addAttribute("user",new User());
-		return "logout";
+		return "homepage";
+	}
+	@RequestMapping(value={"/cart"},method={RequestMethod.GET})
+	public String cart(Model model){
+		// model.addAttribute("user",new User());
+		return "cart";
+	}
+	@RequestMapping("/test")
+	public String getDefaultPage(Principal principal, Model model ){
+		
+		model.addAttribute("user click home", true);
+		return "homepage";
 	}
 	@RequestMapping("/signup")
 	public String signin(Model model){
@@ -67,8 +81,10 @@ public String getpage(@ModelAttribute("User") @Valid User user,BindingResult res
 	List<User> Users= userDao.getAlluser();
 	return "signup";
 	}
+	user.setRole("ROLE_USER");
+	user.setEnabled(true);
 	userDao.addUser(user);
-	return "redirect:/up";
+	return "redirect:login";
 	}
 }
 

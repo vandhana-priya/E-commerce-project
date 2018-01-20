@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page isELIgnored="false" %>
+    <%@ include file="navigation.jsp" %>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
     <%@ taglib prefix="spring-form" uri="http://www.springframework.org/tags/form" %>
+    <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,10 +25,20 @@ input[type=text],input[type=number], input[type=password] {
 .container {
     padding: 16px;
 }
+
+body {
+    
+    background-color: #C0C0C0;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 </style>
 
 <body>
 <c:set value="${pageContext.request.contextPath }" var="context"></c:set>
+<security:authorize access="hasRole('ROLE_ADMIN')">
+
 <spring-form:form class="form-horizontal" action="${context}/addproduct" method="POST" modelAttribute="product" enctype="multipart/form-data">
 
 
@@ -55,8 +68,11 @@ input[type=text],input[type=number], input[type=password] {
 
 <input type= "submit" value="Register"/>
 </div>
-  </div>
+</div>
+
 </spring-form:form>
+</security:authorize>
+<security:authorize access="isAuthenticated()">
  <table class="table table-hover">
           <tr>
          <th>productId</th>
@@ -81,15 +97,19 @@ input[type=text],input[type=number], input[type=password] {
              <td>${product.stock}</td>
              <td>${product.price}</td>
              
-             
+            <security:authorize access="hasRole('ROLE_ADMIN')"> 
            <td> <a href="<c:url value='/editproduct/${product.productId}'/>">
                    <button type="submit" class="btn btn-basic">edit</button></a></td>
              <td><a href="deleteproduct/${product.productId}">
              <button type="submit" class="btn btn-basic">Delete</button></a>
              </td>
+             </security:authorize>
+             <td><a href="<c:url value='/addtocart/${product.productId}'/>">
+                   <button type="submit" class="btn btn-basic">Add To Cart</button></a></td>
              </tr>
              </c:forEach>
              
           </table>
+          </security:authorize>
 </body>
 </html>  

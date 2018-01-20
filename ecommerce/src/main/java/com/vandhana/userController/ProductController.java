@@ -32,13 +32,13 @@ public class ProductController {
 	private CategoryDAO categoryDao;
 
 	private Product product;
-	
+
 	private Category category;
 
 	@RequestMapping("/productform")
 	public String productform(@ModelAttribute("product") Product product, Model model) {
 		System.out.println("------1-----");
-		
+
 		model.addAttribute("product", new Product());
 		System.out.println("------3-----");
 		model.addAttribute("products", productDao.getAllProduct());
@@ -48,14 +48,15 @@ public class ProductController {
 		return "productform";
 	}
 
-	
-	  @RequestMapping(value="/category", method = RequestMethod.POST) public
-	  String product(@ModelAttribute("category") Category category, Model
-	  model) { model.addAttribute("category", category); List<Category>
-	  categories = categoryDao.getAllCategory();
-	  model.addAttribute("categories",categoryDao.getAllCategory());
-	  categoryDao.addCategory(category); return "redirect:/productform"; }
-	 
+	@RequestMapping(value = "/category", method = RequestMethod.POST)
+	public String product(@ModelAttribute("category") Category category, Model model) {
+		model.addAttribute("category", category);
+		List<Category> categories = categoryDao.getAllCategory();
+		model.addAttribute("categories", categoryDao.getAllCategory());
+		categoryDao.addCategory(category);
+		return "redirect:/productform";
+	}
+
 	@RequestMapping(value = "/addproduct", method = RequestMethod.POST)
 	public String product(@ModelAttribute("product") Product product, Model model) {
 		model.addAttribute("uploadFile", product);

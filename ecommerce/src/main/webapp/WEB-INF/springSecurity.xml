@@ -19,18 +19,18 @@
 		<security:form-login login-page="/login"
 			authentication-success-forward-url="/homepage"
 			authentication-failure-forward-url="/login" username-parameter="uname"
-             password-parameter="psw"/>
+             password-parameter="psw" />
              
              		
 		<security:logout logout-url="/logout" logout-success-url="/homepage" />
-		<security:csrf disabled="false" />
+		<security:csrf disabled="true" />
 	</security:http>
 
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
-				users-by-username-query="select username,passsword,enabled from User where username = ?"
+				users-by-username-query="select username,password,enabled from User where username = ?"
 				authorities-by-username-query="select username, role from User where username = ?" />
 		</security:authentication-provider>
 	</security:authentication-manager>

@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
     <%@ include file="my-navbar.jsp" %>
+    <%@page import="java.security.Principal" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,18 +23,40 @@
     </a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <security:authorize access="isAnonymous()">
-      <li><a href="signup">Sign Up</a></li>
-      <li><a href="login">Login</a></li>
-      <li><a href="logout">logout</a></li>
-      </security:authorize>
-      <security:authorize access="isAuthenticated()">
+      
       <li><a href="productform">Product</a></li>
+      
+      <security:authorize access="isAnonymous()">
+      <li><a href="${pageContext.request.contextPath }/signup">Sign Up</a></li>
+      </security:authorize>
+      <security:authorize access="isAnonymous()">
+      <li><a href="${pageContext.request.contextPath }/login">Login</a></li>
+      </security:authorize>
+      <security:authorize access="hasRole('ROLE_USER')">
+      <li><a href="cart">Cart</a></li>
+      </security:authorize>
+      
+      <security:authorize access="hasRole('ROLE_ADMIN')">
       <li><a href="category">Category</a></li>
+      </security:authorize>
+      <security:authorize access="hasRole('ROLE_ADMIN')">
       <li><a href="User">User</a></li>
       </security:authorize>
+      
       <security:authorize access="isAuthenticated()">
-      <security:authentication property="principal"/>
+      <li> <a href="" style="text-align: center; color: black;">HI
+      <%
+      String user=new String();
+      try{
+    	  Principal principal = request.getUserPrincipal();
+    	  user=principal.getName();
+      } catch (Exception e){
+    	  user=new String(" ");
+      }
+      out.print(user);
+      %>
+      </a>
+      </li>
       <li><a href="logout">Logout</a></li>
       </security:authorize>
     </ul>
